@@ -66,10 +66,10 @@ def file_loc():     # Where the files are located (default = Desktop)
 
 def main():
     
-    source = file_loc()
+  """  source = file_loc()
     path = destination_path()
     cat = categorize()
-    file_move(source, path, cat)
+    file_move(source, path, cat) """
     
 
 main()
