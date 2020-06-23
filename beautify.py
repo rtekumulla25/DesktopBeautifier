@@ -1,11 +1,12 @@
 import os
 import shutil
+import getpass
 
 def destination_path():  # Where to move the files  (default = Documents)
     
     reply = input("Do you want to move your files to the Documents folder?(Y/N): ")
     if(reply == 'Y'):
-        path = "C:/Users/rteku/Documents/Desktop test"
+        path = "C:/Users/" + get_username() +  "/Documents/Desktop test"
     else:
         path = input(r"Specify the exact path of the Destination folder: ")
     return path
@@ -13,7 +14,9 @@ def destination_path():  # Where to move the files  (default = Documents)
 #def std_files():    # Which files to keep   (default = Recycle Bin)
     #root_ext = os.path.splitext(pathway)
 
-#def get_username():  #returns the username which is used to specify the path
+def get_username():  #returns the username which is used to specify the path
+    username = getpass.getuser()
+    return username
 
 def categorize():
     reply = input("Do you want to categorize the files based on their extensions?(Y/N): ")
@@ -23,7 +26,7 @@ def categorize():
         return False
     
 
-
+#SKIP FILES IF THE FILES ARE ALREADY PRESENT
 def file_move(source, path, categorize):    # Move the unneccessary files
     if (categorize == False):
         for filename in os.listdir(source):
@@ -32,6 +35,7 @@ def file_move(source, path, categorize):    # Move the unneccessary files
             else:
                 shutil.move(os.path.join(source, filename), path, copy_function = shutil.copytree)
     else:
+        #CREATING A MISC FILE INSTEAD OF MOVING
         for filename in os.listdir(source):
             if filename == "Recycle Bin":
                 continue
@@ -58,7 +62,7 @@ def file_move(source, path, categorize):    # Move the unneccessary files
 def file_loc():     # Where the files are located (default = Desktop)
     reply = input("Are your files located on Desktop?(Y/N): ")
     if(reply == 'Y'):
-        source = "C:/Users/rteku/Desktop/source test"
+        source = "C:/Users/" + get_username() + "/Desktop/source test"
     else:
         source = input(r"Specify the exact path of the folder you have your files in: ")
     return source
